@@ -14,15 +14,20 @@ using namespace std;
 double Sum(double* a, const double n, int i)
 {
 	if (i < n)
-		return a[i] + Sum(a, n, i + 1);
+	{
+		if (a[i] < 0)
+			return a[i] + Sum(a, n, i + 1);
+		else
+			return Sum(a, n, i + 1);
+	}
 	else
 		return 0;
 }
 
 double Dob(double* a, const double n, int i)
 {
-	if (i < n)
-		return a[i] + Dob(a, n, i + 1);
+	if (i == 1)
+		return a[i] * Dob(a, n, i - 1);
 	else
 		return 0;
 }
@@ -62,7 +67,7 @@ int main()
 	}
 
 	cout << "S = " << Sum(a, n, 0) << endl;
-	cout << "D = " << Dob(a, n, 0) << endl;
+	cout << "D = " << Dob(a, n, 1) << endl;
 	cout << "Sort = "; Sort(a, n, 1, 0);
 
 	return 0;
